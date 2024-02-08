@@ -18,31 +18,28 @@ export class LandingPageComponent {
   searchUser(event: Event, username: string) {
     event.preventDefault();
     if (username) {
-      console.log('username:', username);
       this.isLoading = true;
-      this.apiService.getUser(username).subscribe(
-        (data: any) => {
+      this.apiService.getUser(username).subscribe({
+        next: (data) => {
           this.user = data;
           this.errorMessage = '';
           this.isLoading = false;
-          console.log('User data:', this.user);
+
           if (this.user) {
             this.apiService.user = this.user;
-            // this.router.navigate(['/user-info'], {
-            //   queryParams: { user: this.user },
-            // });
-            this.router.navigate(['/user-info']);
-          } else {
-            this.errorMessage = 'User not found!';
+            this.router.navigate(['user-info']);
           }
         },
-        (error) => {
+        error: (error) => {
           this.user = null;
-          this.errorMessage = `User not found!`;
+          this.errorMessage = 'User not found!';
           this.isLoading = false;
-          console.error('API Error:', error);
-        }
-      );
+          console.error('API error : ', error);
+        },
+        complete: () => {
+          console.log('User fetched!');
+        },
+      });
     }
   }
 }
