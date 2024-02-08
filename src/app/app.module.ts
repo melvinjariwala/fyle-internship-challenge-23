@@ -10,9 +10,11 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ApiCacheInterceptor } from './interceptors/api-cache.interceptor';
 import { ApiCacheService } from './services/api-cache.service';
 import { ApiService } from './services/api.service';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { UserReposComponent } from './user-repos/user-repos.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, UserProfileComponent],
+  declarations: [AppComponent, LandingPageComponent, UserProfileComponent, UserInfoComponent, UserReposComponent],
   imports: [BrowserModule, CommonModule, HttpClientModule, AppRoutingModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiCacheInterceptor, multi: true },
