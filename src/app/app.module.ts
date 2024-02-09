@@ -12,10 +12,25 @@ import { ApiCacheService } from './services/api-cache.service';
 import { ApiService } from './services/api.service';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { UserReposComponent } from './user-repos/user-repos.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, UserProfileComponent, UserInfoComponent, UserReposComponent],
-  imports: [BrowserModule, CommonModule, HttpClientModule, AppRoutingModule],
+  declarations: [
+    AppComponent,
+    LandingPageComponent,
+    UserProfileComponent,
+    UserInfoComponent,
+    UserReposComponent,
+    PaginationComponent,
+  ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiCacheInterceptor, multi: true },
     ApiCacheService,

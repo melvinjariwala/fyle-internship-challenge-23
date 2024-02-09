@@ -9,6 +9,6 @@ import { ApiService } from '../services/api.service';
 export class UserInfoComponent {
   user: any;
   constructor(private apiService: ApiService) {
-    this.user = apiService.user;
+    this.user = this.apiService.user;
   }
 }
