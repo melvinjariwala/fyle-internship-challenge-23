@@ -14,6 +14,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { UserReposComponent } from './user-repos/user-repos.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     UserInfoComponent,
     UserReposComponent,
     PaginationComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

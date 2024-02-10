@@ -3,11 +3,11 @@ import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss'],
+  selector: 'app-not-found',
+  templateUrl: './not-found.component.html',
+  styleUrls: ['./not-found.component.scss'],
 })
-export class LandingPageComponent {
+export class NotFoundComponent {
   isLoading: boolean = false;
   user: any;
   errorMessage: string = '';
