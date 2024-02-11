@@ -27,7 +27,7 @@ export class LandingPageComponent {
 
           if (this.user) {
             this.apiService.user = this.user;
-            this.router.navigate(['user-info']);
+            this.router.navigate(['user-profile']);
           }
         },
         error: (error) => {
