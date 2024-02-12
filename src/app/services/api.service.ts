@@ -2,6 +2,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap, throwError } from 'rxjs';
 import { ApiCacheService } from './api-cache.service';
+import { UserStateService } from './user-state.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,11 @@ export class ApiService {
   repos: any;
   constructor(
     private httpClient: HttpClient,
-    private apiCacheService: ApiCacheService
+    private apiCacheService: ApiCacheService,
+    private userStateService: UserStateService
   ) {}
 
-  getUser(githubUsername: string) {
+  getUser(githubUsername: string): Observable<any> {
     const url = `https://api.github.com/users/${githubUsername}`;
     const req = new HttpRequest('GET', url, { responseType: 'json' });
     const cachedResponse = this.apiCacheService.get(req);
@@ -30,7 +32,11 @@ export class ApiService {
 
   // implement getRepos method by referring to the documentation. Add proper types for the return type and params
 
-  getUserRepositories(githubUsername: string, page: number, per_page: number) {
+  getUserRepositories(
+    githubUsername: string,
+    page: number,
+    per_page: number
+  ): Observable<any> {
     const url = `https://api.github.com/users/${githubUsername}/repos?page=${page}&per_page=${per_page}`;
 
     const req = new HttpRequest('GET', url, {

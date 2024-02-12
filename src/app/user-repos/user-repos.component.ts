@@ -1,13 +1,21 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
+import { UserStateService } from '../services/user-state.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-user-repos',
   templateUrl: './user-repos.component.html',
   styleUrls: ['./user-repos.component.scss'],
 })
-export class UserReposComponent implements OnInit {
+export class UserReposComponent implements OnInit, OnDestroy {
   @ViewChild('reposContainer') reposContainer: ElementRef | undefined;
   user: any;
   repositories: any[] = [];
@@ -16,20 +24,18 @@ export class UserReposComponent implements OnInit {
   pageSize: number = 10;
   totalItems: number = 0;
   isLoading: boolean = false;
+  private destroy$ = new Subject<void>();
 
-  constructor(private apiService: ApiService, private router: Router) {
-    if (this.apiService.user) {
-      this.user = this.apiService.user;
-      this.totalItems = this.user.public_repos;
-    } else {
-      this.router.navigate(['']);
-    }
-  }
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private userStateService: UserStateService
+  ) {}
 
-  fetchRepositories() {
+  fetchRepositories(username: any) {
     this.isLoading = true;
     this.apiService
-      .getUserRepositories(this.user.login, this.currentPage, this.pageSize)
+      .getUserRepositories(username, this.currentPage, this.pageSize)
       .subscribe({
         next: (value: any) => {
           this.repositories = value;
@@ -53,14 +59,14 @@ export class UserReposComponent implements OnInit {
   onPageChange(newPage: number): void {
     this.currentPage = newPage;
 
-    this.fetchRepositories();
+    this.fetchRepositories(this.user.login);
     this.scrollToTop();
   }
 
   onPageSizeChange(newPageSize: number): void {
     this.pageSize = newPageSize;
     this.currentPage = 1;
-    this.fetchRepositories();
+    this.fetchRepositories(this.user.login);
   }
 
   scrollToTop(): void {
@@ -68,6 +74,24 @@ export class UserReposComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchRepositories();
+    // this.userStateService.getUser().subscribe((user) => {
+    //   this.user = user;
+    //   this.totalItems = this.user.public_repos;
+    //   this.currentPage = 1;
+    //   this.fetchRepositories(this.user.login);
+    // });
+    this.userStateService
+      .getUser()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
+        this.user = user;
+        (this.totalItems = this.user.public_repos), (this.currentPage = 1);
+        this.fetchRepositories(this.user.login);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

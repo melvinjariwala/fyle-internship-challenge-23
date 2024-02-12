@@ -16,6 +16,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     UserReposComponent,
     PaginationComponent,
     NotFoundComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

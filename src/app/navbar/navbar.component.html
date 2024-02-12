@@ -1,0 +1,25 @@
+<div
+  class="navbar bg-white backdrop-blur-lg bg-opacity-60 p-4 shadow-sm rounded-2xl m-5"
+>
+  <div class="flex items-center cursor-pointer" (click)="navigateToHomePage()">
+    <span class="font-bold items-center">CodePlex</span>
+  </div>
+  <div class="ml-auto flex items-center">
+    <form (ngSubmit)="searchUser($event, username.value)" class="flex">
+      <input
+        type="text"
+        name="username"
+        placeholder="Search GitHub username"
+        [(ngModel)]="searchUsername"
+        #username
+        class="px-2 py-1 border border-white rounded-l-md focus:outline-none"
+      />
+      <button
+        type="submit"
+        class="bg-white text-emerald-500 px-4 py-1 rounded-r-md hover:bg-emerald-400 focus:outline-none"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+</div>

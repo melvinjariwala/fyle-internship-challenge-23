@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { UserStateService } from '../services/user-state.service';
 
 @Component({
   selector: 'app-pagination',
@@ -16,8 +17,10 @@ export class PaginationComponent implements OnInit {
   @Output() pageSizeChange = new EventEmitter<number>();
   user: any;
 
-  constructor(private apiService: ApiService) {
-    this.user = this.apiService.user;
+  constructor(private useStateService: UserStateService) {
+    this.useStateService.getUser().subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ngOnInit(): void {}

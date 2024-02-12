@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
+import { UserStateService } from '../services/user-state.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -13,7 +14,11 @@ export class LandingPageComponent {
   errorMessage: string = '';
 
   @Output() githubUser = new EventEmitter<any>();
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private userStateService: UserStateService
+  ) {}
 
   searchUser(event: Event, username: string) {
     event.preventDefault();
@@ -27,6 +32,7 @@ export class LandingPageComponent {
 
           if (this.user) {
             this.apiService.user = this.user;
+            this.userStateService.setUser(this.user);
             this.router.navigate(['user-profile']);
           }
         },
