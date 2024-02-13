@@ -38,7 +38,11 @@ export class PaginationComponent implements OnInit {
   }
 
   calculateTotalPages(): number {
-    return Math.ceil(this.user.public_repos / this.pageSize);
+    if (this.user && this.user.public_repos) {
+      return Math.ceil(this.user.public_repos / this.pageSize);
+    } else {
+      return 0;
+    }
   }
 
   getPageNumbers(): number[] {

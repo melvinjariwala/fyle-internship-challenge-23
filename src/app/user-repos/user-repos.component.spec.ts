@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserReposComponent } from './user-repos.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { PaginationComponent } from '../pagination/pagination.component';
 
 describe('UserReposComponent', () => {
   let component: UserReposComponent;
@@ -8,7 +11,8 @@ describe('UserReposComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UserReposComponent]
+      declarations: [UserReposComponent, PaginationComponent],
+      imports: [HttpClientModule, FormsModule],
     });
     fixture = TestBed.createComponent(UserReposComponent);
     component = fixture.componentInstance;

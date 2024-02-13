@@ -17,7 +17,7 @@ export class LandingPageComponent {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private userStateService: UserStateService
+    public userStateService: UserStateService
   ) {}
 
   searchUser(event: Event, username: string) {
@@ -37,7 +37,6 @@ export class LandingPageComponent {
           }
         },
         error: (error) => {
-          this.user = null;
           this.errorMessage = 'User not found!';
           this.isLoading = false;
           console.error('API error : ', error);

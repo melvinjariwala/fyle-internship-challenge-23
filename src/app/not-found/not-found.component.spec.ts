@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -8,7 +9,8 @@ describe('NotFoundComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NotFoundComponent]
+      declarations: [NotFoundComponent],
+      imports: [HttpClientModule],
     });
     fixture = TestBed.createComponent(NotFoundComponent);
     component = fixture.componentInstance;

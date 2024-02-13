@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
-import { LandingPageComponent } from '../landing-page/landing-page.component';
 import { UserStateService } from '../services/user-state.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class UserProfileComponent implements OnInit {
   isLoading: boolean = false;
   errorMessage: string = '';
   constructor(
-    private router: Router,
+    public router: Router,
     private apiService: ApiService,
     private userStateService: UserStateService
   ) {}
@@ -36,7 +35,6 @@ export class UserProfileComponent implements OnInit {
           if (this.user) {
             this.apiService.user = this.user;
             this.userStateService.setUser(this.user);
-            // this.router.navigate(['user-profile']);
           }
         },
         error: (error) => {
@@ -57,7 +55,7 @@ export class UserProfileComponent implements OnInit {
     this.userStateService.getUser().subscribe((user) => {
       this.user = user;
     });
-    if (!this.user) {
+    if (!this.user?.login) {
       this.router.navigate(['']);
     }
   }
