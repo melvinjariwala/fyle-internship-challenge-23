@@ -1,43 +1,61 @@
-# Fyle Frontend Challenge
+## Running Unit Tests
 
-## Who is this for?
+**To run the unit tests for this project, follow the steps below:**
 
-This challenge is meant for candidates who wish to intern at Fyle and work with our engineering team. The candidate should be able to commit to at least 6 months of dedicated time for internship.
+**Prerequisites:**
 
-## Why work at Fyle?
+Before running the tests, ensure that you have the following dependencies installed:
 
-Fyle is a fast-growing Expense Management SaaS product. We are ~40 strong engineering team at the moment. 
+- Node.js
+- npm
 
-We are an extremely transparent organization. Check out our [careers page](https://careers.fylehq.com) that will give you a glimpse of what it is like to work at Fyle. Also, check out our Glassdoor reviews [here](https://www.glassdoor.co.in/Reviews/Fyle-Reviews-E1723235.htm). You can read stories from our teammates [here](https://stories.fylehq.com).
+**Installation:**
 
-## Challenge outline
+1. Clone the repository to your local machine:
 
-This challenge involves implementing application using github api. 
+```bash
+git clone https://github.com/melvinjariwala/fyle-internship-challenge-23.git
+```
 
-The services that you need to use are already implemented - check out ApiService.
+2. Navigate to the project directory:
 
-You can see details of this challenge [here](https://fyleuniverse.notion.site/fyleuniverse/Fyle-Frontend-development-challenge-cb5085e5e0864e769e7b98c694400aaa)
+```bash
+cd fyle-internship-challenge-23
+```
 
-__Note__ - This challenge is in angular. We work on angular frameworks & after you join we expect the same from you. Hence it is required to complete this assignement in angular itself.
+3. Install the project dependencies:
 
-## What happens next?
+```bash
+npm install
+```
 
-You will hear back within 48 hours from us via email.
+**Running Tests:**
 
-## Installation
+1. Execute the following command to run the unit tests:
 
-1. Fork this repository to your github account.
-2. Clone the forked repository and proceed with steps mentioned below.
+```bash
+ng test
+```
 
-### Install requirements
-* Install angular cli [Ref](https://angular.io/cli)
-* `npm install` in this repository 
+2. The test runner will launch, and the tests will be executed.
+3. Review the test results in the terminal.
 
-## Development server
+**Code Coverage:**
 
-Run `ng serve` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+To generate and view code coverage reports:
 
-## Further help
+1. Run the following command:
 
-Visit the [Angular Documentation](https://angular.io/guide/styleguide) to learn more.
-Styling is to be strictly done with [Tailwind](https://tailwindcss.com/docs/installation).
+```bash
+ng test --code-coverage
+```
+
+2. Open the generated `coverage/index.html` file in your browser to view detailed code coverage reports.
+
+## Component Test Coverage:
+
+The component tests are located in the `src/app directory`. Ensure that the component test files end with .spec.ts.
+
+## Service Test Coverage:
+
+The service tests are located in the `src/app/services` directory.Ensure that the service test files end with `.spec.ts`.
