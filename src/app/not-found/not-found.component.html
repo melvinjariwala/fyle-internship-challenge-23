@@ -1,24 +1,27 @@
 <div class="text-center">
-  <h1 class="text-7xl text-red-800 font-sans">User not found !</h1>
-  <p class="mt-9 text-3xl text-red-900 font-sans">
+  <h1 class="text-4xl md:text-7xl text-red-800 font-sans">User not found !</h1>
+  <p class="mt-5 mx-5 md:mt-9 text-xl md:text-3xl text-red-900 font-sans">
     Please enter a <span class="underline">valid</span> GitHub username to get
     started!
   </p>
   <form (submit)="searchUser($event, username.value)">
     <input
-      class="mt-7 rounded-xl p-2 m-2 shadow-md"
+      class="mt-5 md:mt-7 rounded-xl p-2 m-2 shadow-md text-sm md:text-base"
       type="text"
       placeholder="GitHub username"
       #username
     />
-    <button class="bg-emerald-500 rounded-xl p-2 m-2 shadow-md" type="submit">
+    <button
+      class="bg-emerald-500 rounded-xl p-2 m-2 shadow-md text-sm md:text-base"
+      type="submit"
+    >
       Search
     </button>
   </form>
 
   <span
     *ngIf="isLoading"
-    class="mt-5 rounded-lg bg-emeral-500/75 border-emerald-900 text-emerald-800 p-3"
+    class="mt-5 rounded-lg bg-emeral-500/75 border-emerald-900 text-emerald-800 p-3 text-sm md:text-base"
     >Loading...</span
   >
 </div>

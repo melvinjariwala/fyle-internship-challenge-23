@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { UserStateService } from '../services/user-state.service';
 
@@ -17,9 +25,10 @@ export class PaginationComponent implements OnInit {
   @Output() pageSizeChange = new EventEmitter<number>();
   user: any;
 
-  constructor(private useStateService: UserStateService) {
-    this.useStateService.getUser().subscribe((user) => {
+  constructor(public userStateService: UserStateService) {
+    this.userStateService.getUser().subscribe((user) => {
       this.user = user;
+      this.calculateTotalPages();
     });
   }
 

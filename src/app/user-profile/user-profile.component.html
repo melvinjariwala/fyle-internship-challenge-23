@@ -1,6 +1,8 @@
-<app-navbar
-  (homeClick)="navigateToHome()"
-  (searchUserClick)="searchUser($event)"
-></app-navbar>
-<app-user-info class="justify-around"></app-user-info>
-<app-user-repos></app-user-repos>
+<div class="mx-auto">
+  <app-navbar
+    (homeClick)="navigateToHome()"
+    (searchUserClick)="searchUser($event)"
+  ></app-navbar>
+  <app-user-info></app-user-info>
+  <app-user-repos></app-user-repos>
+</div>

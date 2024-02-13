@@ -35,7 +35,7 @@ describe('UserProfileComponent', () => {
         { provide: ApiService, useValue: apiServiceSpy },
         { provide: UserStateService, useValue: userStateServiceSpy },
       ],
-      imports: [HttpClientModule, RouterTestingModule],
+      imports: [HttpClientModule, RouterTestingModule, PaginationComponent],
     }).compileComponents();
   });
 

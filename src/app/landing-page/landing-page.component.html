@@ -1,11 +1,11 @@
-<div class="text-center">
-  <h1 class="text-7xl text-emerald-800 font-sans">
+<div class="text-center p-4 md:p-8">
+  <h1 class="text-3xl text-emerald-800 font-sans md:text-7xl">
     Welcome to <span class="underline">CodePlex</span>!
   </h1>
-  <p class="mt-9 text-3xl text-emerald-900 font-sans">
+  <p class="mt-9 md:mt-9 text-lg md:text-3xl text-emerald-900 font-sans">
     Enter a GitHub username to get started!
   </p>
-  <form (submit)="searchUser($event, username.value)">
+  <form (submit)="searchUser($event, username.value)" class="md:mt-4">
     <input
       class="mt-7 rounded-xl p-2 m-2 shadow-md"
       type="text"

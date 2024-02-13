@@ -52,10 +52,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userStateService.getUser().subscribe((user) => {
-      this.user = user;
+    this.userStateService.getUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      },
     });
-    if (!this.user?.login) {
+    if (!this.user) {
       this.router.navigate(['']);
     }
   }
