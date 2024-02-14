@@ -1,8 +1,10 @@
 import {
   Component,
   ElementRef,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { ApiService } from '../services/api.service';
@@ -81,22 +83,31 @@ export class UserReposComponent implements OnInit, OnDestroy {
       this.user = user;
       this.totalItems = this.user.public_repos;
       this.currentPage = 1;
-      this.userRepoStateService
-        .getUserRepos()
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((repos) => {
-          if (repos.length !== 0) {
-            if (repos[0].owner.login === this.user.login) {
-              this.repositories = repos;
-              console.log('From localstorage : ', this.repositories);
-            } else {
-              this.fetchRepositories(this.user.login);
-            }
+      const storedRepos = JSON.parse(localStorage.getItem('userRepos')!);
+      if (
+        storedRepos.length > 0 &&
+        storedRepos[0].owner.login === this.user.login
+      ) {
+        this.repositories = storedRepos;
+      } else {
+        this.fetchRepositories(this.user.login);
+      }
+    });
+    this.userRepoStateService
+      .getUserRepos()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((repos) => {
+        if (repos.length !== 0) {
+          if (repos[0].owner.login === this.user.login) {
+            this.repositories = repos;
+            console.log('From localstorage : ', this.repositories);
           } else {
             this.fetchRepositories(this.user.login);
           }
-        });
-    });
+        } else {
+          this.fetchRepositories(this.user.login);
+        }
+      });
   }
 
   ngOnDestroy(): void {
