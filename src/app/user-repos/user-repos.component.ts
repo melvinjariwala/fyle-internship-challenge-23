@@ -9,6 +9,7 @@ import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 import { UserStateService } from '../services/user-state.service';
 import { Subject, takeUntil } from 'rxjs';
+import { UserRepoStateService } from '../services/user-repo-state.service';
 
 @Component({
   selector: 'app-user-repos',
@@ -29,7 +30,8 @@ export class UserReposComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private userStateService: UserStateService
+    private userStateService: UserStateService,
+    private userRepoStateService: UserRepoStateService
   ) {}
 
   fetchRepositories(username: any) {
@@ -41,6 +43,7 @@ export class UserReposComponent implements OnInit, OnDestroy {
           this.repositories = value;
           this.apiService.repos = this.repositories;
           this.isLoading = false;
+          this.userRepoStateService.setUserRepos(this.repositories);
         },
         error: (err) => {
           this.isLoading = false;
@@ -74,20 +77,26 @@ export class UserReposComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.userStateService.getUser().subscribe((user) => {
-    //   this.user = user;
-    //   this.totalItems = this.user.public_repos;
-    //   this.currentPage = 1;
-    //   this.fetchRepositories(this.user.login);
-    // });
-    this.userStateService
-      .getUser()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((user) => {
-        this.user = user;
-        (this.totalItems = this.user.public_repos), (this.currentPage = 1);
-        this.fetchRepositories(this.user.login);
-      });
+    this.userStateService.getUser().subscribe((user) => {
+      this.user = user;
+      this.totalItems = this.user.public_repos;
+      this.currentPage = 1;
+      this.userRepoStateService
+        .getUserRepos()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((repos) => {
+          if (repos.length !== 0) {
+            if (repos[0].owner.login === this.user.login) {
+              this.repositories = repos;
+              console.log('From localstorage : ', this.repositories);
+            } else {
+              this.fetchRepositories(this.user.login);
+            }
+          } else {
+            this.fetchRepositories(this.user.login);
+          }
+        });
+    });
   }
 
   ngOnDestroy(): void {

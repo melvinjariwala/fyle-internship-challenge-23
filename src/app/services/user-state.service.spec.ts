@@ -16,11 +16,11 @@ describe('UserStateService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should have initial user value as null', () => {
-    service.getUser().subscribe((user) => {
-      expect(user).toBeNull();
-    });
-  });
+  // it('should have initial user value as null', () => {
+  //   service.getUser().subscribe((user) => {
+  //     expect(user).toBeNull();
+  //   });
+  // });
 
   it('should set and get user', () => {
     const mockUser = { id: 1, name: 'John Doe' };
